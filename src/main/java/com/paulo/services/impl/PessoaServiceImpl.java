@@ -1,6 +1,7 @@
 package com.paulo.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,11 @@ public class PessoaServiceImpl implements PessoaService{
 	@Override
 	public Pessoa salvar(Pessoa pessoa) {
 		return pessoaRepository.save(pessoa);
+	}
+
+	@Override
+	public Optional<Pessoa> buscarPorId(Long id) {
+		return pessoaRepository.findById(id);
 	}
 
 }

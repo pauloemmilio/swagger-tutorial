@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import com.paulo.models.Pessoa;
 import com.paulo.services.PessoaService;
 
 import io.swagger.annotations.ApiOperation;
+import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @RequestMapping("/pessoas")
@@ -31,5 +33,12 @@ public class PessoaController {
 	@GetMapping
 	public List<Pessoa> listar(){
 		return pessoaService.listar();
+	}
+	
+	@ApiIgnore
+	@GetMapping(value = "/{id}")
+	public Pessoa exibir(@PathVariable("id") Long id) {
+		Pessoa pessoa = pessoaService.buscarPorId(id).get();
+		return pessoa;
 	}
 }
